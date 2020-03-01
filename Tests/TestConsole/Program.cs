@@ -10,32 +10,105 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            Gamer gamer = new Gamer("Игрок 1", new DateTime(1983, 12, 4, 21, 2, 14));
+            //Gamer gamer = new Gamer("Игрок 1", new DateTime(1983, 12, 4, 21, 2, 14));
 
-            Gamer[] gamers = new Gamer[100];
-            for (var i = 0; i < gamers.Length; i++)
-            {
-                var g = new Gamer(string.Format("Gamer {0}", i + 1), DateTime.Now.Subtract(TimeSpan.FromDays(365 * (i + 18))));
-                gamers[i] = g;
-            }
+            //Gamer[] gamers = new Gamer[100];
+            //for (var i = 0; i < gamers.Length; i++)
+            //{
+            //    var g = new Gamer(string.Format("Gamer {0}", i + 1), DateTime.Now.Subtract(TimeSpan.FromDays(365 * (i + 18))));
+            //    gamers[i] = g;
+            //}
 
-            gamer.SayYouName();
+            //gamer.SayYouName();
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            foreach (var g in gamers)
-                g.SayYouName();
+            //foreach (var g in gamers)
+            //    g.SayYouName();
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            //gamer.SetName("2123");
-            //Console.WriteLine("Имя игрока {0}", gamer.GetName());
+            ////gamer.SetName("2123");
+            ////Console.WriteLine("Имя игрока {0}", gamer.GetName());
 
-            gamer.Name = "123";
+            //gamer.Name = "123";
 
-            Console.WriteLine("Игрок {0}", gamer.Name);
+            //Console.WriteLine("Игрок {0}", gamer.Name);
+
+
+            //var space_ship = new SpaceShip(new Vector2D(5, 7));
+            //var space_ship2 = space_ship;
+            //space_ship.Position = new Vector2D(150, -210);
+
+            //var v1 = new Vector2D(1, 8);
+            //var v2 = v1;
+            //v1.X = 7;
+            //v1.Y = -14;
+
+            //var v3 = v1 + v2;
+            //var v4 = v1 - v2;
+
+            //var v5 = v4 + 7;
+            //var v6 = -v5;
+
+            Printer printer = new Printer();
+
+            printer.Print("Hello World!");
+
+            printer = new PrefixPrinter(">>>>>");
+
+            printer.Print("Hello World!");
+
+            printer = new DateTimeLogPrinter();
+
+            printer.Print("Hello World!");
 
             Console.ReadLine();
+        }
+    }
+
+    class Printer
+    {
+        public Printer()
+        {
+
+        }
+        
+        public virtual void Print(string str)
+        {
+            Console.WriteLine(str);
+        }
+    }
+    class PrefixPrinter : Printer
+    {
+        private string _Prefix;
+
+        public PrefixPrinter(string Prefix) => _Prefix = Prefix;
+
+        public override void Print(string str)
+        {
+            //Console.WriteLine("{0}{1}", _Prefix, str);
+            base.Print(_Prefix + str);
+        }
+    }
+
+    class DateTimeLogPrinter : Printer
+    {
+        public override void Print(string str)
+        {
+            Console.Write(DateTime.Now);
+            Console.Write(">>");
+            base.Print(str);
+        }
+    }
+
+    class FilePrinter : Printer
+    {
+        private string _FileName;
+
+        public FilePrinter(string str)
+        {
+            System.IO.File.AppendAllText(_FileName, str);
         }
     }
 }
