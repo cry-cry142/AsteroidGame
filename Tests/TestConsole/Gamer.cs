@@ -20,7 +20,7 @@ namespace TestConsole
                 _Name = value;
             }
         }
-
+        
         public Gamer(string Name, DateTime DayOfBirth)
         {
             _Name = Name;
@@ -43,9 +43,7 @@ namespace TestConsole
             return Name.Length;
         }
 
-        public void SayYouName()
-        {
-            Console.WriteLine("My name is {0} - {1:dd:MM:yyyy HH:mm:ss}", _Name, _DayOfBirth);
-        }
+        public void SayYouName() => Console.WriteLine("My name is {0} - {1:dd:MM:yyyy HH:mm:ss}", _Name, _DayOfBirth);
+        
     }
 }
