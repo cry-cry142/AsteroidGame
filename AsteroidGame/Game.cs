@@ -17,15 +17,16 @@ namespace AsteroidGame
 
         public static void Inicialize(Form form1)
         {
-            Width = form1.Width;
-            Height = form1.Height;
+            Width = form1.ClientSize.Width;
+            Height = form1.ClientSize.Height;
 
             __Context = BufferedGraphicsManager.Current;
             Graphics g = form1.CreateGraphics();
-            __Buffer = __Context.Allocate(g, new Rectangle(0, 0, form1.Width, form1.Height));
+            __Buffer = __Context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            var timer = new Timer { Interval = 100 };
+            var timer = new Timer { Interval = 1 };
             timer.Tick += OnTimerTick;
+            timer.Start();
         }
 
         private static void OnTimerTick(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace AsteroidGame
         private static VisualObject[] __GameObject;
         public static void Load()
         {
-            __GameObject = new VisualObject[30];
+            __GameObject = new VisualObject[80];
             for (var i = 0; i < __GameObject.Length; i++)
             {
                 __GameObject[i] = new VisualObject(
