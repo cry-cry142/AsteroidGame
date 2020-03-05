@@ -24,7 +24,7 @@ namespace AsteroidGame
             Graphics g = form1.CreateGraphics();
             __Buffer = __Context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            var timer = new Timer { Interval = 1 };
+            var timer = new Timer { Interval = 10 };
             timer.Tick += OnTimerTick;
             timer.Start();
         }
@@ -38,13 +38,21 @@ namespace AsteroidGame
         private static VisualObject[] __GameObject;
         public static void Load()
         {
-            __GameObject = new VisualObject[80];
+            __GameObject = new Stars[100];
+
+            Random rnd = new Random();
+            
             for (var i = 0; i < __GameObject.Length; i++)
             {
-                __GameObject[i] = new VisualObject(
-                    new Point(600, i * 20),
-                    new Point(15 - i, 20 - i),
-                    new Size(20, 20)
+                int star = rnd.Next(2, 4);
+                int speed = rnd.Next(-8, -1);
+                int width = rnd.Next(0, Width);
+                int height = rnd.Next(0, Height);
+                __GameObject[i] = new Stars(
+                    new Point(width, height),
+                    new Point(speed, 0),
+                    new Size(star, star),
+                    new Size(Width, Height)
                     );
             }
         }

@@ -20,6 +20,8 @@ namespace AsteroidGame
             Form form = new Form();
             form.Width = 800;
             form.Height = 600;
+            form.MaximumSize = form.Size;
+            form.MinimumSize = form.Size;
 
 
             form.Show();
